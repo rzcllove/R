@@ -1,0 +1,98 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="UTF-8">  
+    <title>My WebSocket</title>  
+  
+    <script src="../libs/vue.min.js"></script>  
+</head>  
+<body>  
+欢迎来到My WebSocket。<br/><br/>  
+    <div id="ws">  
+    <input id="text" type="text"/>  
+    <button onclick="sendMsg()">发送</button>  
+    <button onclick="closeWS()" :disabled="!opened">关闭连接</button>  
+    <button onclick="openWS()"  :disabled="opened">打开连接</button>  
+    <div v-html="msg"></div>  
+    </div>  
+</body>  
+  
+<script type="text/javascript">  
+    var websocket = null;  
+  
+    var wsVue = new Vue({  
+        el: '#ws',  
+        data: {  
+            msg: "欢迎来到我的WebSocket…<br/>",  
+            opened: false  
+        },  
+        mounted: function(){  
+            initWs();  
+        }  
+    });  
+  
+    function initWs() {  
+        //check if your browser supports WebSocket  
+        if ('WebSocket' in window) {  
+            websocket = new WebSocket("ws://47.94.217.98/ws");  
+        }else if ('MozWebSocket' in window) {
+            alert("MozWebSocket");
+            websocket = new MozWebSocket("ws://ws");
+        } else {
+            alert("SockJS");
+            websocket = new SockJS("http://localhost/ws");
+        } 
+  
+        //错误回调 
+        websocket.onerror = function () {  
+            setMessageContent("error!");  
+            wsVue.opened = false;  
+        };  
+  
+        //打开回调
+        websocket.onopen = function (event) {  
+            setMessageContent("打开webSocket");  
+            wsVue.opened = true;  
+        }  
+  
+        //消息接收回调  
+        websocket.onmessage = function (event) {  
+            setMessageContent(event.data);  
+        }  
+  
+        //关闭回调
+        websocket.onclose = function () {  
+            setMessageContent("关闭websocket ");  
+            wsVue.opened = false;  
+        }  
+  
+        //游览器关闭自动触发 防止服务器异常  
+        window.onbeforeunload = function () {  
+            websocket.close();  
+        }  
+    }  
+  
+    //将信息推送到页面上 
+    function setMessageContent(content) {  
+        wsVue.msg += content  + '<br/>';  
+    }  
+  
+    //关闭连接  
+    function closeWS() {  
+        websocket.close();  
+        wsVue.opened = false;  
+    }  
+  
+    //打开连接
+    function openWS() {  
+        initWs();  
+    }  
+  
+    //信息发送
+    function sendMsg() {  
+        var message = document.getElementById('text').value;  
+        websocket.send(message);  
+    }  
+</script>  
+</body>  
+</html>  

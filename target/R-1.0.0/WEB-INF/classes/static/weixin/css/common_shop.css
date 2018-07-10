@@ -1,0 +1,199 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form, 
+fieldset,input,textarea,p,blockquote,th,td { 
+	margin:0; 
+	padding:0; 
+} 
+body{font-size: 1.4rem;}
+table { 
+	border-collapse:collapse; /*让表格边框细线*/
+	border-spacing:0; /*清除边框间距*/
+} 
+fieldset,img { 
+	border:0 none; /*有些浏览器默认这些标签有边框，所以要清除默认边框*/
+	display:block;
+} 
+address,caption,cite,code,dfn,em,i,u,b,strong,th,var { 
+	font-style:normal; 
+	font-weight:normal; 
+	/*清除标签默认文本样式和加粗*/
+}
+input,textarea{
+	outline:0 none;/*去掉文本框的默认轮廓线*/
+} 
+ol,ul { 
+	list-style:none; /*清除列表默认样式*/
+} 
+caption,th { 
+	text-align:left; /*清除标签默认文本居中对齐*/
+} 
+h1,h2,h3,h4,h5,h6 { 
+	font-size:100%; 
+	font-weight:normal; /*清除标题标签的默认样式*/
+} 
+a{
+	text-decoration:none;/*大部分页面中的链接没有下划线*/
+}
+
+.clearfix:after{
+		height:0;
+		content:" ";
+		display:block;
+		overflow:hidden;
+		clear:both;
+	}
+.clearfix{
+	zoom:1;/*IE低版本浏览器不支持after伪类所以要加这一句*/
+}
+a{ -webkit-tap-highlight-color:rgba(255,0,0,0);}
+/* add YU 2017/1/9 */
+
+
+img{width: 100%;}
+
+/*font size color*/
+html{
+	font-size: 10px;/*重置浏览器字体默认的大小*/	
+}
+.conTitle{
+	font-size: 1.6rem;/*公共标题大小及颜色*/
+	color:#333;
+}
+.conContent{
+	color:#666;/*公共内容大小及颜色*/
+}
+.conTips{
+	font-size: 1.2rem;/*公共提示信息大小及颜色*/
+	color:#999;
+}
+
+body{
+	background: #f9f9f9;
+}
+/*top bottom z-index flex*/
+.conTitle{
+	white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.shenglv{
+	text-overflow: -o-ellipsis-lastline;
+	text-overflow: ellipsis;
+	overflow: hidden;/*省略号*/
+	display: box;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.conTop,.conBottom{
+	position:fixed;left:0;width: 100%;z-index: 999;
+}
+.conTop{
+	top:0;height: 4.5rem;background: #333;color:#fff; left: 0;
+}
+.conBottom{
+	bottom:0;height: 4rem;background: #d5d5d5;background: #fff;box-shadow: 0 -0.1rem .5rem #d5d5d5;
+}
+
+.conTop,.modelChange,.videoList,.conBottom,.talkFlex,.talkBtn,.carListY,.orderType{display: -webkit-flex;display: flex;}
+
+
+.conTop,.bottomItem,.carListY{justify-content:space-between;align-items:center;}
+.bottomItem{
+	-webkit-flex: 2;
+    flex: 2;text-align: center;line-height: 4rem;
+}
+.bottomItem p{
+	font-size: 1.3rem;
+}
+.bottomItem img{
+	vertical-align: -5%;
+    width: 1.5rem;
+    display: inline-block;
+    margin-right:0.4rem;}
+.conLeft{padding-left:.5rem;}
+.conRight{padding-right:.5rem;font-size:1.3rem;}
+.conBox{
+	padding-bottom:5rem;overflow: hidden;
+}
+
+/*border   #d5d5d5  #eee*/
+
+.borBotInner{border-bottom:solid .1rem #eee}
+.borBot{border-bottom:solid .1rem #d5d5d5}
+.borTop{border-top:solid .1rem #d5d5d5}
+
+/* .slideThree */
+.slideThree {
+  width:56px;
+  height: 26px;
+  background: #333;
+  border:1px solid #FFF;
+  position: relative;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+  -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+}
+.slideThree:after {
+  content: '关';
+  color: #000;
+  position: absolute;
+  right: 10px;
+  z-index: 0;
+  font: 12px/26px Arial, sans-serif;
+  font-weight: bold;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
+}
+.slideThree:before {
+  content: '开';
+  color: #fff;/*#00bf00*/
+  position: absolute;
+  left: 10px;
+  z-index: 0;
+  font: 12px/26px Arial, sans-serif;
+  font-weight: bold;
+}
+.slideThree label {
+  display: block;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  background: #fcfff4;
+  background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  -moz-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+}
+.slideThree input[type=checkbox] {
+  visibility: hidden;
+}
+.slideThree input[type=checkbox]:checked + label {
+  left: 30px;
+}
+
+
+
+
+
+
+
+

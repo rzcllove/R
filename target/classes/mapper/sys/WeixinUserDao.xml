@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.rzclk.modules.sys.dao.WeixinUserDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="top.rzclk.modules.sys.entity.WeixinUserEntity" id="weixinUserMap">
+        <result property="id" column="id"/>
+        <result property="openid" column="openid"/>
+        <result property="nickname" column="nickname"/>
+        <result property="sex" column="sex"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="country" column="country"/>
+        <result property="headimgurl" column="headimgurl"/>
+        <result property="privilege" column="privilege"/>
+        <result property="unionid" column="unionid"/>
+        <result property="accessToken" column="access_token"/>
+    </resultMap>
+	<select id="queryOpenid" parameterType="top.rzclk.modules.sys.entity.WeixinUserEntity"  resultType="int">
+		select count(*) from weixin_user where openid = #{openid}
+	</select>
+	<select id="queryObject" resultType="top.rzclk.modules.sys.entity.WeixinUserEntity">
+		select * from weixin_user where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="top.rzclk.modules.sys.entity.WeixinUserEntity">
+		select * from weixin_user
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from weixin_user 
+	</select>
+	<insert id="insert" parameterType="top.rzclk.modules.sys.entity.WeixinUserEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into weixin_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="openid!=null">
+			openid,
+			</if>
+			<if test="nickname!=null">
+			nickname,
+			</if>
+			<if test="sex!=null">
+			sex,
+			</if>
+			<if test="province!=null">
+			province,
+			</if>
+			<if test="city!=null">
+			city,
+			</if>
+			<if test="country!=null">
+			country,
+			</if>
+			<if test="headimgurl!=null">
+			headimgurl,
+			</if>
+			<if test="privilege!=null">
+			privilege,
+			</if>
+			<if test="unionid!=null">
+			unionid,
+			</if>
+			<if test="accessToken!=null">
+			access_token,
+			</if>
+		</trim>
+			<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="openid!=null">
+				#{openid},
+			</if>
+			<if test="nickname!=null">
+				#{nickname},
+			</if>
+			<if test="sex!=null">
+				#{sex},
+			</if>
+			<if test="province!=null">
+				#{province},
+			</if>
+			<if test="city!=null">
+				#{city},
+			</if>
+			<if test="country!=null">
+				#{country},
+			</if>
+			<if test="headimgurl!=null">
+				#{headimgurl},
+			</if>
+			<if test="privilege!=null">
+				#{privilege},
+			</if>
+			<if test="unionid!=null">
+				#{unionid},
+			</if>
+			<if test="accessToken!=null">
+				#{accessToken},
+			</if>
+		</trim>
+	</insert>
+	<insert id="save" parameterType="top.rzclk.modules.sys.entity.WeixinUserEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into weixin_user
+		(
+			`openid`, 
+			`nickname`, 
+			`sex`, 
+			`province`, 
+			`city`, 
+			`country`, 
+			`headimgurl`, 
+			`privilege`, 
+			`unionid`, 
+			`access_token`
+		)
+		values
+		(
+			#{openid}, 
+			#{nickname}, 
+			#{sex}, 
+			#{province}, 
+			#{city}, 
+			#{country}, 
+			#{headimgurl}, 
+			#{privilege}, 
+			#{unionid}, 
+			#{accessToken}
+		)
+	</insert>
+	<update id="updateFor" parameterType="top.rzclk.modules.sys.entity.WeixinUserEntity">
+		 <selectKey keyProperty='id' resultType='int' order='BEFORE'>
+            SELECT
+            (select id FROM weixin_user 
+            where openid=#{openid}
+            )id
+            from DUAL
+ 		  </selectKey>
+		update weixin_user 
+		<set>
+			<if test="openid != null">`openid` = #{openid}, </if>
+			<if test="nickname != null">`nickname` = #{nickname}, </if>
+			<if test="sex != null">`sex` = #{sex}, </if>
+			<if test="province != null">`province` = #{province}, </if>
+			<if test="city != null">`city` = #{city}, </if>
+			<if test="country != null">`country` = #{country}, </if>
+			<if test="headimgurl != null">`headimgurl` = #{headimgurl}, </if>
+			<if test="privilege != null">`privilege` = #{privilege}, </if>
+			<if test="unionid != null">`unionid` = #{unionid}, </if>
+			<if test="accessToken != null">`access_token` = #{accessToken}</if>
+		</set>
+		<where>
+			<if test="openid!=null">
+			   openid =#{openid}
+			</if>
+		</where>
+	</update>
+	
+	<update id="update" parameterType="top.rzclk.modules.sys.entity.WeixinUserEntity">
+		update weixin_user 
+		<set>
+			<if test="openid != null">`openid` = #{openid}, </if>
+			<if test="nickname != null">`nickname` = #{nickname}, </if>
+			<if test="sex != null">`sex` = #{sex}, </if>
+			<if test="province != null">`province` = #{province}, </if>
+			<if test="city != null">`city` = #{city}, </if>
+			<if test="country != null">`country` = #{country}, </if>
+			<if test="headimgurl != null">`headimgurl` = #{headimgurl}, </if>
+			<if test="privilege != null">`privilege` = #{privilege}, </if>
+			<if test="unionid != null">`unionid` = #{unionid}, </if>
+			<if test="accessToken != null">`access_token` = #{accessToken}</if>
+		</set>
+		where openid = #{openid}
+	</update>
+	
+	<delete id="delete">
+		delete from weixin_user where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from weixin_user where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

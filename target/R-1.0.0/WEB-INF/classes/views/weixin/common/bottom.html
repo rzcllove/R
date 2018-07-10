@@ -1,0 +1,17 @@
+<div class="conBottom" th:fragment="copy">
+			<div class="bottomItem" id="shopIndex">
+				<a href="javascript:void(0);"><img src="images/homeImg.png"/>商城</a>
+			</div>
+			<div class="bottomItem type_tab" id="typeProd" @click="type_TabFun">
+				<a href="javascript:void(0);"><img src="images/lineImg.png"/>分类</a>
+				<ul class="type_change">
+					<li  v-for="list in classList">{{list.name}}</li>
+				</ul>
+			</div>
+			<div class="bottomItem" id="shopCar">
+				<a href="javascript:void(0);"><img src="images/shop.png"/>购物车</a>
+			</div>
+			<div class="bottomItem" id="newProd">
+				<a href="javascript:void(0);"><img src="images/newCur.png"/>我的</a>
+			</div>
+</div>
