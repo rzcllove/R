@@ -1,4 +1,0 @@
-<div class="conTop"  th:fragment="copy">
-	<div class="conCenter"></div>
-	<div class="conRight" id="shopOrder"><p>我的订单</p></div>
-</div>
